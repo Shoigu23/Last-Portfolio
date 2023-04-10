@@ -1,0 +1,18 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+<div class="nav_post mt-5 m-5">
+    <div class="vab m-5">
+        <h1>Post create</h1>
+
+       <div style="display: flex; justify-content: center;">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-primary" type="submit" value="Submit Post">
+        </form>
+       </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="registr m-5" style="display: flex; justify-content: center;">
+  <hr>
+  <p>Hello</p>
+  <hr>
+    <h1>{{title}}</h1>
+</div>
+<div class="form m-5" style="display: flex; justify-content: center;">
+  <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div style="display: flex; justify-content: center;"><button type="submit" style="border: 5px;">Регистрация</button></div>
+  </form>
+
+</div>
+{% endblock %}

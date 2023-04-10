@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<hr>
+<div class="lor mt-5">
+    <p>lorem</p>
+</div>
+<hr>
+<div class="m-5">
+    <div style="display: flex; justify-content: center;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div style="display: flex; justify-content: center;"><button type="submit">Войти</button></div>
+        </form>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <a href="{% url 'registration' %}"> <button class="mt-3">Регистрация</button></a> 
+    </div>
+</div>
+{% endblock %}

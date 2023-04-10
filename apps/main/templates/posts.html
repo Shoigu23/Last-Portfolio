@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="values_section m-5"> 
+    <div class="container m-5"> 
+      <div class="title values_title mt-5"> 
+        <div>
+          <form action="" method="GET">
+            {{myfilter.form}}
+            <input class="btn btn-primary" type="submit" value="search">
+            
+          </form>
+        </div>
+        <hr>
+        <h3>Проекты</h3> 
+          {% for post in posts %}
+          <div class="mentor__card mt-5">
+            <img class="mentorImg" src="{{ post.image.url }}" alt="" style="width: 300px; height: 200;">
+            <div class="mentorCard__title">
+              <h6><a href="{% url 'post' post.id %}">{{ post.headline}}</a><span>{{post.sud_headline}}</span></h6>
+              <div class="mentorCard__info">
+                <div class="card__icons">
+                  <div class="icon">
+                    {% if request.user.is_authenticated %}
+                      <button style="background-color: rgb(194, 190, 190); border-radius: 5px;"><a href="{% url 'update_post' post.id %}" style="text-decoration: none;">Изменить</a></button>
+                      <button style="background-color: rgb(235, 153, 153); border-radius: 7px;"><a href="{% url 'delete_post' post.id %}" style="text-decoration: none;">Удалить</a></button>
+                    {% endif %}
+                    <hr>
+                    {% for tag in post.tags.all %}
+                      <span style="background-color: aqua; border-radius: 5px;">{{tag}}</span>
+                    {% endfor %}
+                    <hr>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+              <hr>
+              <h1>Пока нет проектов</h1>
+            {% endfor %} 
+          </div>
+  </section>
+ <div>
+  
+
+  <nav aria-label="Page navigation example" class="container m-5">
+    {% if posts.has_other_pages %}
+      <ul class="pagination">
+      {% if posts.has_previous %}
+
+      
+        <li class="page-item"><a data-page="1" class="page-link" href="?page=1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a></li>
+      
+      {% endif %}
+      {% for i in posts.paginator.page_range %}
+        {% if posts.number == i %}
+          <li class="page-item"><a class="page-link" href="">{{i}}</a></li>
+        {% else %}
+          <li class="page-item"><a data-page="{{i}}" class="page-link" href="?page={{i}}">{{i}}</a></li>
+        {% endif %}
+      {% endfor %}
+
+          <li class="page-item">
+        {% if posts.has_next %}
+            <a class="page-link" href="?page=2" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>          
+        {% endif %}
+      </ul>
+    {% endif %}
+  </nav>
+
+
+{% endblock %}
